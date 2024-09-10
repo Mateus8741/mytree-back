@@ -9,6 +9,7 @@ async function seed() {
         {
             email: 't@t.com',
             password: '12345678',
+            name: 'Tt',
             content: [
                 {
                     urlContent: 'https://www.google.com',
@@ -30,6 +31,7 @@ async function seed() {
         {
             email: 'teste@t.com',
             password: '12345678',
+            name: 'Teste',
             content: [
                 {
                     urlContent: 'https://www.google.com',
@@ -51,6 +53,7 @@ async function seed() {
         {
             email: 'test@t.com',
             password: '12345678',
+            name: 'Test',
             content: [
                 {
                     urlContent: 'https://www.google.com',
@@ -78,6 +81,7 @@ async function seed() {
             data: {
                 email: user.email,
                 password: hashedPassword,
+                name: user.name,
                 content: {
                     createMany: {
                         data: user.content,
