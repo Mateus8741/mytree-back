@@ -13,6 +13,7 @@ import fastifyCookie from '@fastify/cookie';
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import { registerUser } from "./routes/Auth/registerUser";
+import { contentLinks } from "./routes/Content/contentLinks";
 
 const app = fastify().withTypeProvider();
 
@@ -47,6 +48,7 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(auth)
 
 app.register(registerUser)
+app.register(contentLinks)
 
 app.listen({
     port: 3100,
