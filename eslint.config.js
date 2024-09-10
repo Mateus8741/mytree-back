@@ -1,6 +1,6 @@
 module.exports = [
     {
-        ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
+        ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'build/**', 'prisma/**'],
     },
     {
         files: ['src/**/*.{js,ts,jsx,tsx}'],
@@ -9,16 +9,21 @@ module.exports = [
             sourceType: 'module',
         },
         plugins: {
+            '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
             node: require('eslint-plugin-node'),
             promise: require('eslint-plugin-promise'),
             import: require('eslint-plugin-import'),
             asyncAwait: require('eslint-plugin-async-await'),
+        },
+        languageOptions: {
+            parser: require('@typescript-eslint/parser'),
         },
         rules: {
             'node/no-unsupported-features/es-syntax': [
                 'error',
                 { ignores: ['modules'] },
             ],
+            '@typescript-eslint/no-unused-vars': 'warn',
             'promise/always-return': 'warn',
             'promise/no-return-wrap': 'error',
             'promise/param-names': 'error',
