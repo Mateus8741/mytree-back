@@ -1,5 +1,9 @@
 import fastify from "fastify";
-import { ZodTypeProvider, jsonSchemaTransform, serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
+import {
+    jsonSchemaTransform,
+    serializerCompiler,
+    validatorCompiler
+} from "fastify-type-provider-zod";
 import { auth } from './middleware/verify-jwt';
 
 import multer from "fastify-multer";
@@ -11,7 +15,7 @@ import fastifyCookie from '@fastify/cookie';
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 
-const {register, listen, setValidatorCompiler, setSerializerCompiler} = fastify().withTypeProvider<ZodTypeProvider>();
+const {register, listen, setValidatorCompiler, setSerializerCompiler} = fastify().withTypeProvider();
 
 register(fastifyCookie)
 register(fastifyJwt, { secret: 'supersecret-omniF' })
