@@ -10,7 +10,7 @@
     "start": "node dist/server.js",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "lint": "eslint ."
+    "db:seed": "tsx --env-file .env src/prisma/seed.ts"
   },
   "license": "MIT",
   "devDependencies": {
