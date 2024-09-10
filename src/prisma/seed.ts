@@ -6,14 +6,56 @@ async function seed() {
         {
             email: 't@t.com',
             password: '12345678',
+            urlContent: [
+                {
+                    url: 'https://www.google.com',
+                    content: 'Google',
+                },
+                {
+                    url: 'https://www.facebook.com',
+                    content: 'Facebook',
+                },
+                {
+                    url: 'https://www.twitter.com',
+                    content: 'Twitter',
+                },
+            ]
         },
         {
             email: 'teste@t.com',
             password: '12345678',
+            urlContent: [
+                {
+                    url: 'https://www.google.com',
+                    content: 'Google',
+                },
+                {
+                    url: 'https://www.facebook.com',
+                    content: 'Facebook',
+                },
+                {
+                    url: 'https://www.twitter.com',
+                    content: 'Twitter',
+                },
+            ]
         },
         {
             email: 'test@t.com',
             password: '12345678',
+            urlContent: [
+                {
+                    url: 'https://www.google.com',
+                    content: 'Google',
+                },
+                {
+                    url: 'https://www.facebook.com',
+                    content: 'Facebook',
+                },
+                {
+                    url: 'https://www.twitter.com',
+                    content: 'Twitter',
+                },
+            ]
         }
     ];
 
