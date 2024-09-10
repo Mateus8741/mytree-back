@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "./prisma-client";
 
 async function seed() {
+    await prisma.content.deleteMany();
     await prisma.user.deleteMany();
 
     const users = [
@@ -12,14 +13,17 @@ async function seed() {
                 {
                     urlContent: 'https://www.google.com',
                     contentName: 'Google',
+                    order: 0,
                 },
                 {
                     urlContent: 'https://www.facebook.com',
                     contentName: 'Facebook',
+                    order: 1,
                 },
                 {
                     urlContent: 'https://www.twitter.com',
                     contentName: 'Twitter',
+                    order: 2,
                 },
             ]
         },
@@ -30,14 +34,17 @@ async function seed() {
                 {
                     urlContent: 'https://www.google.com',
                     contentName: 'Google',
+                    order: 0,
                 },
                 {
                     urlContent: 'https://www.facebook.com',
                     contentName: 'Facebook',
+                    order: 1,
                 },
                 {
                     urlContent: 'https://www.twitter.com',
                     contentName: 'Twitter',
+                    order: 2,
                 },
             ]
         },
@@ -48,14 +55,17 @@ async function seed() {
                 {
                     urlContent: 'https://www.google.com',
                     contentName: 'Google',
+                    order: 0,
                 },
                 {
                     urlContent: 'https://www.facebook.com',
                     contentName: 'Facebook',
+                    order: 1,
                 },
                 {
                     urlContent: 'https://www.twitter.com',
                     contentName: 'Twitter',
+                    order: 2,
                 },
             ]
         }
