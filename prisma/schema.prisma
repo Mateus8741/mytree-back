@@ -23,11 +23,11 @@ model User {
 }
 
 model Content {
-  id         String   @id @default(cuid())
-  urlContent String
-  content    String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  User       User?    @relation(fields: [userId], references: [id])
-  userId     String?
+  id          String   @id @default(cuid())
+  urlContent  String
+  contentName String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User     @relation(fields: [userId], references: [id])
+  userId      String
 }
