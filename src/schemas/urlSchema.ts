@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 const UrlSchema = z.object({
     urlContent: z.string().url(),
@@ -7,4 +7,7 @@ const UrlSchema = z.object({
     order: z.number().default(0),
 })
 
-export { UrlSchema }
+const UpdateUrlSchema = UrlSchema.partial();
+
+export { UpdateUrlSchema, UrlSchema };
+

@@ -1,6 +1,17 @@
 name: mytree-server
 
 services:
+  mytree-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3100:3100"
+    volumes:
+      - .:/home/node/app
+      - ./dist:/home/node/app/dist
+    depends_on:
+      - pg
   pg:
     image: bitnami/postgresql:13.16.0
     ports:
