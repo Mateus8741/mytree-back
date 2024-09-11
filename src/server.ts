@@ -14,7 +14,8 @@ import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import { loginUser } from "./routes/Auth/loginUser";
 import { registerUser } from "./routes/Auth/registerUser";
-import { contentLinks } from "./routes/Content/contentLinks";
+import { createContentLinks } from "./routes/Content/createContentLinks";
+import { getContentLinks } from "./routes/Content/getContentLinks";
 
 const app = fastify().withTypeProvider();
 
@@ -51,7 +52,8 @@ app.register(auth)
 app.register(registerUser)
 app.register(loginUser)
 
-app.register(contentLinks)
+app.register(createContentLinks)
+app.register(getContentLinks)
 
 app.listen({
     port: 3100,
