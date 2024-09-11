@@ -3,7 +3,7 @@ import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { prisma } from '../../prisma/prisma-client'
 import { UrlSchema } from '../../schemas/urlSchema'
 
-export async function contentLinks(app: FastifyInstance) {
+export async function createContentLinks(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .post('/content', {
