@@ -12,6 +12,7 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastifyCookie from '@fastify/cookie';
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
+import { loginUser } from "./routes/Auth/loginUser";
 import { registerUser } from "./routes/Auth/registerUser";
 import { contentLinks } from "./routes/Content/contentLinks";
 
@@ -48,6 +49,8 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(auth)
 
 app.register(registerUser)
+app.register(loginUser)
+
 app.register(contentLinks)
 
 app.listen({
