@@ -8,8 +8,9 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - .:/home/node/app
-      - ./dist:/home/node/app/dist
+      - ./:/home/node/app
+      - /home/node/app/dist
+      - /home/node/app/node_modules
     depends_on:
       - pg
   pg:

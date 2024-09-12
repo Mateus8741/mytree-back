@@ -5,18 +5,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch --env-file .env src/server.ts",
-    "build": "tsup src --format esm",
+    "build": "tsup src --format cjs",
     "del:dist": "rm -rf dist",
     "start": "node dist/server.js",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
+    "db:generate": "prisma generate",
     "db:seed": "tsx --env-file .env src/prisma/seed.ts"
   },
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/bcryptjs": "^2.4.6",
-    "@types/mime": "^4.0.0",
     "@types/node": "^20.12.7",
     "prisma": "^5.14.0",
     "ts-node": "^10.9.2",
@@ -35,6 +35,7 @@
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^1.1.9",
+    "mime": "^4.0.4",
     "zod": "^3.22.5"
   }
 }

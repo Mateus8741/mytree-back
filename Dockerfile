@@ -1,4 +1,6 @@
-FROM node:20-slim AS testing
+FROM node:20-slim
+
+RUN apt-get update -y && apt-get install -y openssl && apt-get clean
 
 USER node
 
@@ -11,25 +13,7 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
-RUN npm run build
+RUN npm run db:generate && npm run build
 
-ENV NODE_ENV=prod
-CMD [ "npm", "run", "start:prod" ]
 
-FROM node:20-slim AS production
-
-USER node
-
-RUN mkdir -p /home/node/app
-
-WORKDIR /home/node/app
-
-COPY --from=testing --chown=node:node /home/node/app/package*.json ./
-RUN npm ci --omit=dev
-
-COPY --from=testing --chown=node:node /home/node/app .
-
-EXPOSE 3100
-
-ENV NODE_ENV=prod
 CMD [ "npm", "run", "start" ]
