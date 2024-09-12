@@ -13,6 +13,8 @@ services:
       - /home/node/app/node_modules
     depends_on:
       - pg
+    env_file:
+        - .env 
   pg:
     image: bitnami/postgresql:13.16.0
     ports:
