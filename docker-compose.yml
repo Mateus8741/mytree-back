@@ -14,7 +14,7 @@ services:
     depends_on:
       - pg
     env_file:
-        - .env 
+      - .env
   pg:
     image: bitnami/postgresql:13.16.0
     ports:
