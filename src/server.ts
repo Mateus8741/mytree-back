@@ -6,27 +6,30 @@ import {
 } from "fastify-type-provider-zod";
 import { auth } from './middleware/verify-jwt';
 
-import multer from "fastify-multer";
-
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 
 import fastifyCookie from '@fastify/cookie';
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
+import { loginUser } from "./routes/Auth/loginUser";
+import { registerUser } from "./routes/Auth/registerUser";
+import { createContentLinks } from "./routes/Content/createContentLinks";
+import { getContentLinks } from "./routes/Content/getContentLinks";
+import { updateContentLinks } from "./routes/Content/updateContentLinks";
 
-const {register, listen, setValidatorCompiler, setSerializerCompiler} = fastify().withTypeProvider();
+const app = fastify().withTypeProvider();
 
-register(fastifyCookie)
-register(fastifyJwt, { secret: 'supersecret-omniF' })
+app.register(fastifyCookie)
+app.register(fastifyJwt, { secret: 'supersecret-mytree' })
 
-register(fastifyCors, {
+app.register(fastifyCors, {
     origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 });
 
-register(fastifySwagger, {
+app.register(fastifySwagger, {
     swagger: {
         consumes: ["application/json"],
         produces: ["application/json"],
@@ -39,18 +42,22 @@ register(fastifySwagger, {
     transform: jsonSchemaTransform,
 })
 
-register(fastifySwaggerUi, {
+app.register(fastifySwaggerUi, {
     routePrefix: "/docs",
 })
 
-register(multer.contentParser);
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
+app.register(auth)
 
-setValidatorCompiler(validatorCompiler);
-setSerializerCompiler(serializerCompiler);
-register(auth)
+app.register(registerUser)
+app.register(loginUser)
 
+app.register(createContentLinks)
+app.register(getContentLinks)
+app.register(updateContentLinks)
 
-listen({
+app.listen({
     port: 3100,
     host: "0.0.0.0",
 }, () => console.log('Server is running on port 3100'));

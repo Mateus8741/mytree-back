@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Content" ADD COLUMN     "isActived" BOOLEAN NOT NULL DEFAULT true,
+ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;

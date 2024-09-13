@@ -4,27 +4,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/server.ts",
-    "build": "tsup src --format esm",
+    "dev": "tsx watch --env-file .env src/server.ts",
+    "build": "tsup src --format cjs",
     "del:dist": "rm -rf dist",
     "start": "node dist/server.js",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "lint": "eslint ."
+    "db:generate": "prisma generate",
+    "db:seed": "tsx --env-file .env src/prisma/seed.ts"
   },
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@types/bcryptjs": "^2.4.6",
-    "@types/mime": "^4.0.0",
     "@types/node": "^20.12.7",
-    "@typescript-eslint/eslint-plugin": "^8.5.0",
-    "@typescript-eslint/parser": "^8.5.0",
-    "eslint": "^9.10.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-async-await": "^0.0.0",
-    "eslint-plugin-import": "^2.30.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^7.1.0",
     "prisma": "^5.14.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
@@ -39,10 +32,11 @@
     "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.14.0",
     "bcryptjs": "^2.4.3",
-    "fastify": "^4.26.2",
-    "fastify-multer": "^2.0.3",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^1.1.9",
+    "mime": "^4.0.4",
     "zod": "^3.22.5"
   }
 }

@@ -1,7 +1,7 @@
 // import { FastifyReply, FastifyRequest } from 'fastify'
 
-import { FastifyInstance } from "fastify"
-import fastifyPlugin from "fastify-plugin"
+import type { FastifyInstance } from 'fastify'
+import fastifyPlugin from 'fastify-plugin'
 
 // export async function verifyJwt(request: FastifyRequest, reply: FastifyReply) {
 //   try {
@@ -11,10 +11,8 @@ import fastifyPlugin from "fastify-plugin"
 //   }
 // }
 
-
-
 export const auth = fastifyPlugin(async (app: FastifyInstance) => {
-  app.addHook('preHandler', async (request) => {
+  app.addHook('preHandler', async request => {
     request.getCurrentUserId = async () => {
       try {
         const { sub } = await request.jwtVerify<{ sub: string }>()
