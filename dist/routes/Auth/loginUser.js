@@ -48,6 +48,7 @@ var RegisterSchema = import_zod.z.object({
   password: import_zod.z.string().min(8),
   name: import_zod.z.string().min(3)
 });
+var LoginSchema = RegisterSchema.partial();
 
 // src/routes/Auth/loginUser.ts
 async function loginUser(app) {
@@ -55,7 +56,7 @@ async function loginUser(app) {
     "/login",
     {
       schema: {
-        body: RegisterSchema,
+        body: LoginSchema,
         summary: "Login a user",
         tags: ["User"]
       }

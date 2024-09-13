@@ -20,6 +20,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/schemas/registerSchema.ts
 var registerSchema_exports = {};
 __export(registerSchema_exports, {
+  LoginSchema: () => LoginSchema,
   RegisterSchema: () => RegisterSchema
 });
 module.exports = __toCommonJS(registerSchema_exports);
@@ -29,7 +30,9 @@ var RegisterSchema = import_zod.z.object({
   password: import_zod.z.string().min(8),
   name: import_zod.z.string().min(3)
 });
+var LoginSchema = RegisterSchema.partial();
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  LoginSchema,
   RegisterSchema
 });
