@@ -15,6 +15,7 @@ import fastifyJwt from "@fastify/jwt";
 import { loginUser } from "./routes/Auth/loginUser";
 import { registerUser } from "./routes/Auth/registerUser";
 import { createContentLinks } from "./routes/Content/createContentLinks";
+import { deleteContentLinks } from "./routes/Content/deleteContentLinks";
 import { getContentLinks } from "./routes/Content/getContentLinks";
 import { updateContentLinks } from "./routes/Content/updateContentLinks";
 
@@ -56,6 +57,7 @@ app.register(loginUser)
 app.register(createContentLinks)
 app.register(getContentLinks)
 app.register(updateContentLinks)
+app.register(deleteContentLinks)
 
 app.listen({
     port: 3100,

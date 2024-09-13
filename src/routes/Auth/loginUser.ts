@@ -1,21 +1,24 @@
-import bcrypt from 'bcryptjs';
-import type { FastifyInstance } from 'fastify';
-import type { ZodTypeProvider } from 'fastify-type-provider-zod';
-import { prisma } from '../../prisma/prisma-client';
-import { RegisterSchema } from '../../schemas/registerSchema';
+import bcrypt from 'bcryptjs'
+import type { FastifyInstance } from 'fastify'
+import type { ZodTypeProvider } from 'fastify-type-provider-zod'
+import type { infer as ZodInfer } from 'zod'
+import { prisma } from '../../prisma/prisma-client'
+import { LoginSchema, type RegisterSchema } from '../../schemas/registerSchema'
 
 export async function loginUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
     '/login',
     {
       schema: {
-        body: RegisterSchema,
+        body: LoginSchema,
         summary: 'Login a user',
         tags: ['User'],
       },
     },
     async (request, reply) => {
-      const { email, password } = request.body
+      const { email, password } = request.body as ZodInfer<
+        typeof RegisterSchema
+      >
 
       const user = await prisma.user.findFirst({
         where: {
@@ -45,13 +48,13 @@ export async function loginUser(app: FastifyInstance) {
         },
         {
           expiresIn: '600d',
-        },
+        }
       )
 
       return reply.send({
         token,
         email: user.email,
       })
-    },
-  )       
+    }
+  )
 }

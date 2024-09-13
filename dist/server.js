@@ -64,6 +64,7 @@ var RegisterSchema = import_zod.z.object({
   password: import_zod.z.string().min(8),
   name: import_zod.z.string().min(3)
 });
+var LoginSchema = RegisterSchema.partial();
 
 // src/routes/Auth/loginUser.ts
 async function loginUser(app2) {
@@ -71,7 +72,7 @@ async function loginUser(app2) {
     "/login",
     {
       schema: {
-        body: RegisterSchema,
+        body: LoginSchema,
         summary: "Login a user",
         tags: ["User"]
       }
@@ -197,6 +198,37 @@ async function createContentLinks(app2) {
   });
 }
 
+// src/routes/Content/deleteContentLinks.ts
+var import_zod3 = require("zod");
+async function deleteContentLinks(app2) {
+  app2.withTypeProvider().delete("/content/:contentId", {
+    schema: {
+      params: import_zod3.z.object({
+        contentId: import_zod3.z.string().cuid()
+      })
+    }
+  }, async (request, reply) => {
+    const { contentId } = request.params;
+    const userId = await request.getCurrentUserId();
+    if (!userId) {
+      return reply.status(401).send({ error: "Usu\xE1rio n\xE3o autenticado" });
+    }
+    const content = await prisma.content.findFirst({
+      where: { id: contentId }
+    });
+    if (!content) {
+      return reply.status(404).send({ error: "Conte\xFAdo n\xE3o encontrado" });
+    }
+    if (content.userId !== userId) {
+      return reply.status(403).send({ error: "Voc\xEA n\xE3o tem permiss\xE3o para deletar este pedido" });
+    }
+    await prisma.content.deleteMany({
+      where: { id: contentId }
+    });
+    return reply.status(204).send({ message: "Pedido deletado com sucesso!" });
+  });
+}
+
 // src/routes/Content/getContentLinks.ts
 async function getContentLinks(app2) {
   app2.withTypeProvider().get("/content", {
@@ -223,7 +255,7 @@ async function getContentLinks(app2) {
 }
 
 // src/routes/Content/updateContentLinks.ts
-var import_zod3 = require("zod");
+var import_zod4 = require("zod");
 async function updateContentLinks(app2) {
   app2.withTypeProvider().put(
     "/content/:id",
@@ -232,8 +264,8 @@ async function updateContentLinks(app2) {
         summary: "Update content links",
         tags: ["Content"],
         body: UpdateUrlSchema,
-        params: import_zod3.z.object({
-          id: import_zod3.z.string().cuid()
+        params: import_zod4.z.object({
+          id: import_zod4.z.string().cuid()
         })
       }
     },
@@ -300,6 +332,7 @@ app.register(loginUser);
 app.register(createContentLinks);
 app.register(getContentLinks);
 app.register(updateContentLinks);
+app.register(deleteContentLinks);
 app.listen({
   port: 3100,
   host: "0.0.0.0"

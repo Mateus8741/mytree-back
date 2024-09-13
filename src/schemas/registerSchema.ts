@@ -6,4 +6,7 @@ const RegisterSchema = z.object({
   name: z.string().min(3),
 })
 
-export { RegisterSchema }
+const LoginSchema = RegisterSchema.partial()
+
+export { LoginSchema, RegisterSchema }
+
