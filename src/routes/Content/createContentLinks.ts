@@ -8,7 +8,9 @@ export async function createContentLinks(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .post('/content', {
       schema: {
-        body: UrlSchema
+        body: UrlSchema,
+        summary: 'Create content links',
+        tags: ['Content'],
       },
     }, async (request, reply) => {
       try {
@@ -30,7 +32,7 @@ export async function createContentLinks(app: FastifyInstance) {
         console.error('Error creating url:', error)
 
         return reply.status(500).send({
-          message: 'Internal Server Error',
+          message: 'Erro interno do servidor',
         })
       }
     })

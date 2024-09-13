@@ -24,7 +24,7 @@ export async function registerUser(app: FastifyInstance) {
 
         if (alreadyExistsSameEmail) {
           return reply.status(400).send({
-            message: 'Email already exists',
+            message: 'Email já cadastrado',
           })
         }
 
@@ -39,13 +39,13 @@ export async function registerUser(app: FastifyInstance) {
         })
 
         return reply.status(201).send({
-          message: 'User registered successfully',
+          message: 'Usuário cadastrado com sucesso',
         })
       } catch (error) {
         console.error('Error registering user:', error)
 
         return reply.status(500).send({
-          message: 'Internal Server Error',
+          message: 'Erro interno do servidor',
         })
       }
     }

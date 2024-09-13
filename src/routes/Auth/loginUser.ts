@@ -26,7 +26,7 @@ export async function loginUser(app: FastifyInstance) {
       if (!user) {
         reply.status(401)
         return {
-          error: 'Invalid credentials',
+          error: 'Credenciais inválidas',
         }
       }
 
@@ -35,7 +35,7 @@ export async function loginUser(app: FastifyInstance) {
       if (!passwordMatch) {
         reply.status(401)
         return {
-          error: 'Invalid credentials',
+          error: 'Credenciais inválidas',
         }
       }
 

@@ -26,7 +26,7 @@ export async function getContentLinks(app: FastifyInstance) {
             console.error('Error getting content:', error)
     
             return reply.status(500).send({
-                message: 'Internal Server Error',
+                message: 'Erro interno do servidor',
             })
         }
     })
