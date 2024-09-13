@@ -9,6 +9,8 @@ export async function registerUser(app: FastifyInstance) {
     '/register',
     {
       schema: {
+        summary: 'Register user',
+        tags: ['User'],
         body: RegisterSchema,
       },
     },

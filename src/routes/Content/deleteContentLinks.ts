@@ -8,6 +8,8 @@ export async function deleteContentLinks(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .delete('/content/:contentId', {
         schema: {
+            summary: 'Delete content links',
+            tags: ['Content'], 
             params: z.object({
                 contentId: z.string().cuid(),
             }),
