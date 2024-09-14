@@ -12,6 +12,7 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastifyCookie from '@fastify/cookie';
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
+import { changePassword } from "./routes/Auth/changePassword";
 import { loginUser } from "./routes/Auth/loginUser";
 import { registerUser } from "./routes/Auth/registerUser";
 import { createContentLinks } from "./routes/Content/createContentLinks";
@@ -53,6 +54,7 @@ app.register(auth)
 
 app.register(registerUser)
 app.register(loginUser)
+app.register(changePassword)
 
 app.register(createContentLinks)
 app.register(getContentLinks)
